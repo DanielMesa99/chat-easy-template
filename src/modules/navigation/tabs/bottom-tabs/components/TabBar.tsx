@@ -36,7 +36,7 @@ const TabBar: React.FC<MaterialTopTabBarProps> = ({
           </Text>
         </TouchableOpacity>
       </View>
-      <View className="absolute bottom-5 self-center flex-row h-20 w-11/12 sm:w-9/12 md:w-8/12 lg:w-6/12 px-3 items-center rounded-3xl elevation bg-light-primaryContainer dark:bg-dark-primaryContainer">
+      <View className="absolute bottom-5 self-center flex-row h-20 w-11/12 sm:w-9/12 md:w-8/12 lg:w-6/12 px-3 items-center rounded-2xl elevation bg-light-primaryContainer dark:bg-dark-primaryContainer">
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           /* Ensure that label is a string (either from tabBarLabel, title, or route name) */
