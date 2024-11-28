@@ -27,8 +27,8 @@ const TabBar: React.FC<MaterialTopTabBarProps> = ({
     <>
       <View className="mr-5">
         <TouchableOpacity
-          className="absolute bottom-28 self-end p-5 rounded-full elevation bg-light-primary dark:bg-dark-primary"
-          onPress={() => {}}
+          className="absolute bottom-28 self-end sm:mr-16 md:mr-28 lg:mr-64 p-5 rounded-full elevation bg-light-primary dark:bg-dark-primary"
+          onPress={() => { }}
           activeOpacity={0.7}
         >
           <Text className={'text-light-onPrimary dark:text-dark-onPrimary'}>
@@ -36,7 +36,7 @@ const TabBar: React.FC<MaterialTopTabBarProps> = ({
           </Text>
         </TouchableOpacity>
       </View>
-      <View className="absolute bottom-5 self-center flex-row h-20 w-11/12 px-3 items-center rounded-3xl elevation bg-light-primaryContainer dark:bg-dark-primaryContainer">
+      <View className="absolute bottom-5 self-center flex-row h-20 w-11/12 sm:w-9/12 md:w-8/12 lg:w-6/12 px-3 items-center rounded-3xl elevation bg-light-primaryContainer dark:bg-dark-primaryContainer">
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           /* Ensure that label is a string (either from tabBarLabel, title, or route name) */
