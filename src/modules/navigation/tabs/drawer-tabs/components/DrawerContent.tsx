@@ -26,7 +26,7 @@ const iconMap: { [key: string]: string } = {
  *
  * @extends {DrawerContentComponentProps}
  */
-interface DrawerContentProps extends DrawerContentComponentProps { }
+interface DrawerContentProps extends DrawerContentComponentProps {}
 
 /**
  * DrawerContent component that renders the content of the drawer (navigation menu).

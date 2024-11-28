@@ -16,6 +16,8 @@ module.exports = {
           onPrimary: 'white',
           secondary: '#C71585',
           onSecondary: 'white',
+          sub: 'gray',
+          line: '#D1D5DB',
         },
         dark: {
           background: '#1E1E2D',
@@ -28,6 +30,8 @@ module.exports = {
           onPrimary: 'white',
           secondary: '#C71585',
           onSecondary: 'white',
+          sub: '#D3D3D3',
+          line: 'black',
         },
       },
     },

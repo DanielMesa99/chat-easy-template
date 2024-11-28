@@ -28,7 +28,7 @@ const TabBar: React.FC<MaterialTopTabBarProps> = ({
       <View className="mr-5">
         <TouchableOpacity
           className="absolute bottom-28 self-end sm:mr-16 md:mr-28 lg:mr-64 p-5 rounded-full elevation bg-light-primary dark:bg-dark-primary"
-          onPress={() => { }}
+          onPress={() => {}}
           activeOpacity={0.7}
         >
           <Text className={'text-light-onPrimary dark:text-dark-onPrimary'}>
