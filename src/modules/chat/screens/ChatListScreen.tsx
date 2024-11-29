@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { ChatItem } from '../components';
 import { Chat, chats } from '../data';
 
-const ChatListScreen: React.FC = () => {
+const ChatListScreen: React.FC = (): JSX.Element => {
   const [chatState, setChatState] = useState<Chat[]>(chats);
 
   const handlePress = (id: string) => {
