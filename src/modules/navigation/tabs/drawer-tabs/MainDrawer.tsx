@@ -57,9 +57,9 @@ const MainDrawer: React.FC = (): JSX.Element => {
           backgroundColor: themeColors.primaryContainer,
         },
         headerStyle: {
-          backgroundColor: themeColors.background,
+          backgroundColor: themeColors.primaryContainer,
         },
-        headerTintColor: themeColors.onBackground,
+        headerTintColor: themeColors.onPrimaryContainer,
         headerRight: () => (
           <HeaderRight
             onCameraPress={handleCameraPress}
