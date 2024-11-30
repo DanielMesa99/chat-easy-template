@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, FlatList, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 /** Custom dependencies */
 import { ChatItem } from '../components';
@@ -8,6 +9,7 @@ import { Chat, chats } from '../data';
 
 const ChatListScreen: React.FC = (): JSX.Element => {
   const [chatState, setChatState] = useState<Chat[]>(chats);
+  const { t } = useTranslation();
 
   const handlePress = (id: string) => {
     console.log('Pressed chat with id:', id);
@@ -18,10 +20,10 @@ const ChatListScreen: React.FC = (): JSX.Element => {
       {chatState.length === 0 ? (
         <View className="flex-1 justify-center items-center">
           <Text className="text-center text-light-onBackground dark:text-dark-onBackground">
-            Oops, it looks like you don't have any saved chats.
+            {t('chat_list.empty')}
           </Text>
           <Text className="mt-3 text-center text-light-onBackground dark:text-dark-onBackground">
-            Start a new chat at any time.
+            {t('chat_list.new_chat')}
           </Text>
         </View>
       ) : (
@@ -51,9 +53,9 @@ const ChatListScreen: React.FC = (): JSX.Element => {
                 <Ionicons name={'lock-closed'} size={16} className="mt-1" />
               </Text>
               <Text className="ml-3 text-center text-light-onBackground dark:text-dark-onBackground">
-                All messages are encrypted{' '}
+                {t('chat_list.encrypted')}{' '}
                 <Text className="color-light-primary dark:color-dark-primary">
-                  end-to-end.
+                  {t('chat_list.end_to_end')}
                 </Text>
               </Text>
             </View>
