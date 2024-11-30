@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -7,11 +7,17 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { i18n } from '../i18n';
 
 /**
- * GlobalProviderProps is a type that defines the properties for the GlobalProvider component.
+ * Props for the GlobalContext.
  */
-interface GlobalProviderProps {
-  children: React.ReactNode;
+interface GlobalContextProps {
+  isScrollingDown: boolean;
+  setIsScrollingDown: (scrolling: boolean) => void;
 }
+
+/**
+ * Context to provide global values and functions.
+ */
+const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
 
 /**
  * GlobalProvider is a context component that aggregates multiple providers
@@ -24,22 +30,20 @@ interface GlobalProviderProps {
  *   <App />
  * </GlobalProvider>
  *
- * @param {GlobalProviderProps} props - The props for the component.
  * @returns {JSX.Element} - The combined providers wrapping the children components.
  */
-const GlobalProvider: React.FC<GlobalProviderProps> = ({
-  children,
-}: GlobalProviderProps): JSX.Element => {
+const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
 
   return (
-    <I18nextProvider i18n={i18n}>
-      <NavigationContainer>
-        <SafeAreaProvider>
-          {children}
-        </SafeAreaProvider>
-      </NavigationContainer>
-    </I18nextProvider>
+    <GlobalContext.Provider value={{ isScrollingDown, setIsScrollingDown }}>
+      <I18nextProvider i18n={i18n}>
+        <NavigationContainer>
+          <SafeAreaProvider>{children}</SafeAreaProvider>
+        </NavigationContainer>
+      </I18nextProvider>
+    </GlobalContext.Provider>
   );
 };
 
-export { GlobalProvider, GlobalProviderProps };
+export { GlobalProvider, GlobalContext, GlobalContextProps };
