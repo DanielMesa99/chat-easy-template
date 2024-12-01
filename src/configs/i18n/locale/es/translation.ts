@@ -10,7 +10,7 @@ const es = {
     new_chat: 'Inicia un nuevo chat en cualquier momento.',
     encrypted: 'Todos los mensajes están encriptados',
     end_to_end: 'de extremo a extremo.',
-  }
+  },
 };
 
 export { es };

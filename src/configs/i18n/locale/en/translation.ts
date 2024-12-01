@@ -10,7 +10,7 @@ const en = {
     new_chat: 'Start a new chat at any time.',
     encrypted: 'All messages are encrypted',
     end_to_end: 'end-to-end.',
-  }
+  },
 };
 
 export { en };

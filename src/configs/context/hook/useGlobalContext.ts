@@ -15,11 +15,11 @@ import { GlobalContext, GlobalContextProps } from '../GlobalContext';
  * @throws {Error} If used outside of GlobalProvider.
  */
 const useGlobalContext = (): GlobalContextProps => {
-    const context = useContext(GlobalContext);
-    if (!context) {
-        throw new Error('useGlobalContext must be used within a GlobalProvider');
-    }
-    return context;
+  const context = useContext(GlobalContext);
+  if (!context) {
+    throw new Error('useGlobalContext must be used within a GlobalProvider');
+  }
+  return context;
 };
 
 export { useGlobalContext };

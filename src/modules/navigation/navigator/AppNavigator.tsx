@@ -17,14 +17,14 @@ import { MainDrawer } from '../tabs';
  * @returns {JSX.Element} The main navigation structure.
  */
 const AppNavigator: React.FC = (): JSX.Element => {
-    const { colorScheme } = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
-    return (
-        <GlobalProvider>
-            <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
-            <MainDrawer />
-        </GlobalProvider>
-    );
+  return (
+    <GlobalProvider>
+      <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
+      <MainDrawer />
+    </GlobalProvider>
+  );
 };
 
 export { AppNavigator };

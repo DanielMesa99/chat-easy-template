@@ -32,7 +32,9 @@ const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
  *
  * @returns {JSX.Element} - The combined providers wrapping the children components.
  */
-const GlobalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+const GlobalProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}): JSX.Element => {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
 
   return (
