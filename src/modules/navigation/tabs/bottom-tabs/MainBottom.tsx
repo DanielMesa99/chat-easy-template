@@ -2,7 +2,6 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 /** Custom dependencies **/
 import { TabBar } from './components';
@@ -21,7 +20,7 @@ const Tab = createMaterialTopTabNavigator();
 /**
  * The MainBottom navigator renders a bottom tab navigator with a custom tab bar.
  * It defines the screens for Chats, Stories, Communities, and Calls, each of which renders a corresponding component.
- * The TabBar component is used to render custom tab bar navigation with animated icons and labels.
+ * The TabBar handles its own visibility and animation based on the scroll direction.
  *
  * @tab
  * @example
@@ -31,31 +30,20 @@ const Tab = createMaterialTopTabNavigator();
  * @returns {React.JSX.Element} The bottom tab navigation with custom TabBar.
  */
 const MainBottom: React.FC = (): React.JSX.Element => {
+  // Translates the i18n keys into localized strings
   const { t } = useTranslation();
+  // Global context hook to get the current scrolling state (scrolling down or not)
   const { isScrollingDown } = useGlobalContext();
-
-  const tabBarTranslateY = useSharedValue(0);
-
-  React.useEffect(() => {
-    tabBarTranslateY.value = withTiming(isScrollingDown ? 500 : 0, { duration: 500 });
-  }, [isScrollingDown]);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: tabBarTranslateY.value }],
-  }));
 
   return (
     <Tab.Navigator
       initialRouteName="Chats"
       tabBarPosition="bottom"
-      tabBar={props => (
-        <Animated.View style={[animatedStyle]}>
-          <TabBar {...props} />
-        </Animated.View>
-      )}
+      tabBar={props => <TabBar {...props} isScrollingDown={isScrollingDown} />}
       screenOptions={{
         lazy: true,
         lazyPlaceholder: () => (
+          /* Show a loading spinner while the screen is loading */
           <ActivityIndicator
             size="large"
             className="color-light-primary dark:color-dark-primary"

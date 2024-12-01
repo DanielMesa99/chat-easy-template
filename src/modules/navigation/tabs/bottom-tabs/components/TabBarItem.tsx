@@ -6,7 +6,7 @@ import { useTabBarAnimation } from '../hooks';
 import { BottomIconKeys, bottomIcons } from '../types';
 
 /**
- * The interface for the props of the TabBarItem component.
+ * Interface for the props of the TabBarItem component.
  * This interface defines the properties passed to each tab item, including the route, focus state, label, and press handler.
  *
  * @interface TabBarItemProps
@@ -41,7 +41,7 @@ const TabBarItem: React.FC<TabBarItemProps> = ({
   label,
   onPress,
 }: TabBarItemProps): React.JSX.Element => {
-  /* Retrieve animations for the icon and text */
+  // Retrieve animations for the icon and text
   const { scaleIconAnim, scaleTextAnim, opacityTextAnim } =
     useTabBarAnimation(isFocused);
 

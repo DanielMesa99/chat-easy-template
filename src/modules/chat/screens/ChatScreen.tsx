@@ -65,7 +65,7 @@ const ChatScreen: React.FC = (): JSX.Element => {
   return (
     <View className="flex-1 bg-light-background dark:bg-dark-background">
       {chatState.length === 0 ? (
-        /** Show a message if there are no chats **/
+        /* Show a message if there are no chats */
         <View className="flex-1 justify-center items-center">
           <Text className="text-center text-light-onBackground dark:text-dark-onBackground">
             {t('chat_list.empty')}
@@ -93,7 +93,7 @@ const ChatScreen: React.FC = (): JSX.Element => {
           )}
           onScroll={handleScroll}
           ListFooterComponent={
-            /** Footer displaying information about encryption **/
+            /* Footer displaying information about encryption */
             <View className="flex-row justify-center h-56 mt-3">
               <Text className="text-light-onBackground dark:text-dark-onBackground">
                 <Ionicons name={'lock-closed'} size={16} className="mt-1" />
