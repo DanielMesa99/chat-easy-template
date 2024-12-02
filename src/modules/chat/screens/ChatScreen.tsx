@@ -1,113 +1,88 @@
 import React, { useState } from 'react';
 import {
   View,
-  FlatList,
   Text,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
+  FlatList,
+  TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTranslation } from 'react-i18next';
-
 /** Custom dependencies **/
-import { ChatItem } from '../components';
-import { Chat, chats } from '../data';
-import { useGlobalContext } from '../../../configs';
 
-/**
- * ChatScreen renders a list of chat items.
- * It displays a list of chat conversations with their relevant details like last message,
- * unread messages, and the timestamp. If there are no chats, it shows a placeholder message.
- *
- * The component handles scroll events to determine the scrolling direction and updates
- * the global state (`isScrollingDown`) accordingly.
- *
- * @screen
- * @example
- * // Example usage:
- * <ChatScreen />
- *
- * @returns {JSX.Element} The main chat screen containing either a list of chats or a placeholder message.
- */
-const ChatScreen: React.FC = (): JSX.Element => {
-  // State to store the list of chats
-  const [chatState, setChatState] = useState<Chat[]>(chats);
-  // State to track the scroll position for detecting the scroll direction
-  const [scrollPosition, setScrollPosition] = useState(0);
-  // Translation hook for handling internationalization
-  const { t } = useTranslation();
-  // Global context hook to set the scroll direction in the app context
-  const { setIsScrollingDown } = useGlobalContext();
+interface Message {
+  id: string;
+  content: string;
+  isMine: boolean;
+  timestamp: string;
+}
 
-  const handlePress = (id: string) => {
-    console.log('Pressed chat with id:', id);
-  };
+const ChatScreen: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      content: 'Hola, ¿cómo estás?',
+      isMine: false,
+      timestamp: '2024-12-01T10:00:00Z',
+    },
+    {
+      id: '2',
+      content: 'Bien, ¿y tú?',
+      isMine: true,
+      timestamp: '2024-12-01T10:01:00Z',
+    },
+  ]);
+  const [inputValue, setInputValue] = useState('');
 
-  /**
-   * Handles the scroll event for the chat list.
-   * Detects the scroll direction (up or down) and updates the global state
-   * to reflect whether the user is scrolling down.
-   *
-   * @param {NativeSyntheticEvent<NativeScrollEvent>} event - The native scroll event.
-   */
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const currentOffset = event.nativeEvent.contentOffset.y;
-    const direction =
-      currentOffset < 10
-        ? 'up'
-        : currentOffset > scrollPosition
-          ? 'down'
-          : 'up';
-    setIsScrollingDown(direction === 'down'); // Update the scroll direction in the global context
-    setScrollPosition(currentOffset);
+  const handleSend = () => {
+    if (inputValue.trim() !== '') {
+      const newMessage: Message = {
+        id: `${messages.length + 1}`,
+        content: inputValue,
+        isMine: true,
+        timestamp: new Date().toISOString(),
+      };
+      setMessages([...messages, newMessage]);
+      setInputValue('');
+    }
   };
 
   return (
     <View className="flex-1 bg-light-background dark:bg-dark-background">
-      {chatState.length === 0 ? (
-        /* Show a message if there are no chats */
-        <View className="flex-1 justify-center items-center">
-          <Text className="text-center text-light-onBackground dark:text-dark-onBackground">
-            {t('chat_list.empty')}
-          </Text>
-          <Text className="mt-3 text-center text-light-onBackground dark:text-dark-onBackground">
-            {t('chat_list.new_chat')}
-          </Text>
-        </View>
-      ) : (
-        <FlatList
-          data={chatState}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <ChatItem
-              id={item.id}
-              name={item.name}
-              lastMessage={item.lastMessage}
-              timestamp={item.timestamp}
-              unread={item.unread}
-              avatarUrl={item.avatarUrl}
-              lastMessageIsMine={item.lastMessageIsMine}
-              lastMessageRead={item.lastMessageRead}
-              onPress={handlePress}
-            />
-          )}
-          onScroll={handleScroll}
-          ListFooterComponent={
-            /* Footer displaying information about encryption */
-            <View className="flex-row justify-center h-56 mt-3">
-              <Text className="text-light-onBackground dark:text-dark-onBackground">
-                <Ionicons name={'lock-closed'} size={16} className="mt-1" />
-              </Text>
-              <Text className="ml-3 text-center text-light-onBackground dark:text-dark-onBackground">
-                {t('chat_list.encrypted')}{' '}
-                <Text className="color-light-primary dark:color-dark-primary">
-                  {t('chat_list.end_to_end')}
-                </Text>
+      <FlatList
+        data={messages}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <View
+            className={`flex-row ${item.isMine ? 'justify-end' : 'justify-start'} m-2`}
+          >
+            <View
+              className={`p-3 rounded-lg ${item.isMine ? 'bg-light-primary dark:bg-dark-primary' : 'bg-gray-300'}`}
+            >
+              <Text className="text-lg text-light-onPrimary dark:text-dark-onPrimary">
+                {item.content}
               </Text>
             </View>
-          }
+          </View>
+        )}
+        inverted
+      />
+      <View className="flex-row items-center px-4 py-2 border-t border-light-line dark:border-dark-line">
+        <TextInput
+          className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-lg px-4 py-5 text-light-onBackground dark:text-dark-onBackground"
+          placeholder="Escribe un mensaje"
+          placeholderTextColor="#999"
+          value={inputValue}
+          onChangeText={setInputValue}
         />
-      )}
+        <TouchableOpacity
+          onPress={handleSend}
+          className="ml-2 rounded-lg p-4 bg-light-primary dark:bg-dark-primary"
+        >
+          <Text className="text-light-onPrimary dark:text-dark-onPrimary">
+            <Ionicons name="send" size={24} />
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

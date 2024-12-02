@@ -20,7 +20,7 @@ interface ChatItemProps {
   avatarUrl: string;
   lastMessageIsMine: boolean;
   lastMessageRead: boolean;
-  onPress: (id: string) => void;
+  onPress: () => void;
 }
 
 /**
@@ -59,7 +59,7 @@ const ChatItem: React.FC<ChatItemProps> = ({
     <TouchableOpacity
       className="flex-row items-center h-24 p-4 mx-1 border-b border-light-line dark:border-dark-line"
       activeOpacity={0.7}
-      onPress={() => onPress(id)}
+      onPress={onPress}
     >
       <Image
         source={{ uri: avatarUrl }}
