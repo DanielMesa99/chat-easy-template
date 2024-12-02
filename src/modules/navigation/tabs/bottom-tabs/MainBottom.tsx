@@ -2,14 +2,15 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 /** Custom dependencies **/
 import { TabBar } from './components';
-import { ChatScreen } from '../../../chat';
 import { StorieScreen } from '../../../storie';
 import { CommunityScreen } from '../../../community';
 import { CallScreen } from '../../../call';
 import { useGlobalContext } from '../../../../configs';
+import { ChatStack } from '../../stacks';
 
 /**
  * createMaterialTopTabNavigator is used in MainBottom to leverage its native swipeable tab functionality,
@@ -35,26 +36,33 @@ const MainBottom: React.FC = (): React.JSX.Element => {
   // Global context hook to get the current scrolling state (scrolling down or not)
   const { isScrollingDown } = useGlobalContext();
 
+  const shouldHideTabBar = (route: any): boolean => {
+    const routeName = getFocusedRouteNameFromRoute(route) ?? 'Chats';
+    return routeName === 'ChatView';
+  };
+
   return (
     <Tab.Navigator
       initialRouteName="Chats"
       tabBarPosition="bottom"
-      tabBar={props => <TabBar {...props} isScrollingDown={isScrollingDown} />}
-      screenOptions={{
+      tabBar={props => {
+        return !shouldHideTabBar(props.state.routes[props.state.index]) ? (
+          <TabBar {...props} isScrollingDown={isScrollingDown} />
+        ) : null;
+      }}
+      screenOptions={({ route }) => ({
         lazy: true,
         lazyPlaceholder: () => (
           /* Show a loading spinner while the screen is loading */
-          <ActivityIndicator
-            size="large"
-            className="color-light-primary dark:color-dark-primary"
-          />
+          <ActivityIndicator size="large" color="#f9fafe" />
         ),
         animationEnabled: false,
-      }}
+        swipeEnabled: !shouldHideTabBar(route),
+      })}
     >
       <Tab.Screen
         name="Chats"
-        component={ChatScreen}
+        component={ChatStack}
         options={{ title: t('menu.chats') }}
       />
       <Tab.Screen

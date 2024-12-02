@@ -2,7 +2,7 @@ import React from 'react';
 import { Animated, Pressable, Text } from 'react-native';
 
 /** Custom dependencies **/
-import { useTabBarAnimation } from '../hooks';
+import { useTabBarItemAnimation } from '../hooks';
 import { BottomIconKeys, bottomIcons } from '../types';
 
 /**
@@ -35,55 +35,57 @@ interface TabBarItemProps {
  * @param {TabBarItemProps} props - Props for the tab item, including route, label, and focus state.
  * @returns {React.JSX.Element} The tab item component with animations.
  */
-const TabBarItem: React.FC<TabBarItemProps> = ({
-  route,
-  isFocused,
-  label,
-  onPress,
-}: TabBarItemProps): React.JSX.Element => {
-  // Retrieve animations for the icon and text
-  const { scaleIconAnim, scaleTextAnim, opacityTextAnim } =
-    useTabBarAnimation(isFocused);
+const TabBarItem: React.FC<TabBarItemProps> = React.memo(
+  ({
+    route,
+    isFocused,
+    label,
+    onPress,
+  }: TabBarItemProps): React.JSX.Element => {
+    // Retrieve animations for the icon and text
+    const { scaleIconAnim, scaleTextAnim, opacityTextAnim } =
+      useTabBarItemAnimation(isFocused);
 
-  return (
-    <Pressable
-      onPress={onPress}
-      className="flex-1 justify-center items-center"
-      accessibilityState={isFocused ? { selected: true } : {}}
-    >
-      {/* Animated Icon */}
-      <Animated.View
-        style={{
-          transform: [{ scale: scaleIconAnim }],
-        }}
+    return (
+      <Pressable
+        onPress={onPress}
+        className="flex-1 justify-center items-center"
+        accessibilityState={isFocused ? { selected: true } : {}}
       >
-        {bottomIcons[route.name as BottomIconKeys]({
-          isFocused,
-        })}
-      </Animated.View>
-
-      {/* Animated Text */}
-      {isFocused && label && (
-        <Animated.Text
+        {/* Animated Icon */}
+        <Animated.View
           style={{
-            transform: [{ scale: scaleTextAnim }],
-            opacity: opacityTextAnim,
+            transform: [{ scale: scaleIconAnim }],
           }}
-          className={`text-sm`}
         >
-          <Text
-            className={
-              isFocused
-                ? 'text-light-primary dark:text-dark-primary'
-                : 'text-light-onBackground dark:text-dark-onBackground'
-            }
+          {bottomIcons[route.name as BottomIconKeys]({
+            isFocused,
+          })}
+        </Animated.View>
+
+        {/* Animated Text */}
+        {isFocused && label && (
+          <Animated.Text
+            style={{
+              transform: [{ scale: scaleTextAnim }],
+              opacity: opacityTextAnim,
+            }}
+            className={`text-sm`}
           >
-            {label}
-          </Text>
-        </Animated.Text>
-      )}
-    </Pressable>
-  );
-};
+            <Text
+              className={
+                isFocused
+                  ? 'text-light-primary dark:text-dark-primary'
+                  : 'text-light-onBackground dark:text-dark-onBackground'
+              }
+            >
+              {label}
+            </Text>
+          </Animated.Text>
+        )}
+      </Pressable>
+    );
+  },
+);
 
 export { TabBarItem };
