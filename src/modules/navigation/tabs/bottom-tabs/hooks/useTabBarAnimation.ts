@@ -1,5 +1,10 @@
 import { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
+import {
+  useAnimatedStyle,
+  useDerivedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 /**
  * The type for the return value of the useTabBarAnimation hook.
@@ -27,7 +32,7 @@ export interface TabBarAnimation {
  * @param isFocused - A boolean indicating whether the tab is focused or not.
  * @returns {TabBarAnimation} The animated values for the icon scale, text scale, and text opacity.
  */
-const useTabBarAnimation = (isFocused: boolean): TabBarAnimation => {
+const useTabBarItemAnimation = (isFocused: boolean): TabBarAnimation => {
   /* Create references to hold the animated values for icon scale, text scale, and text opacity */
   const scaleIconAnim = useRef(new Animated.Value(isFocused ? 0.9 : 1)).current;
   const scaleTextAnim = useRef(new Animated.Value(isFocused ? 1 : 0.8)).current;
@@ -59,4 +64,41 @@ const useTabBarAnimation = (isFocused: boolean): TabBarAnimation => {
   return { scaleIconAnim, scaleTextAnim, opacityTextAnim };
 };
 
-export { useTabBarAnimation };
+/**
+ * Hook to handle the animation of the TabBar based on the scroll direction.
+ * It calculates the translateY value and returns the animated style to apply on the TabBar.
+ *
+ * @hook
+ * @example
+ * // Example usage:
+ * const animatedStyle = useTabBarAnimation(isScrollingDown, animateBar);
+ *
+ * @param {boolean} isScrollingDown - Indicates whether the user is scrolling down.
+ * @returns The animated style to be applied to the TabBar.
+ */
+const useTabBarAnimation = (isScrollingDown: boolean) => {
+  /**
+   * Update animation based on scroll direction.
+   * Effect to update the tabBarTranslateY value based on the scrolling direction.
+   */
+  const derivedTranslateY = useDerivedValue(() => {
+    return isScrollingDown
+      ? withTiming(250, { duration: 400 })
+      : withTiming(0, { duration: 400 });
+  });
+
+  /**
+   * Define the animated style for the TabBar.
+   * Animated style that applies the translateY transformation to the TabBar.
+   */
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: derivedTranslateY.value }],
+      zIndex: 1, // Ensure it's interactive when visible
+    };
+  });
+
+  return animatedStyle;
+};
+
+export { useTabBarAnimation, useTabBarItemAnimation };

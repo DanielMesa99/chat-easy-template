@@ -2,9 +2,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 /** Custom dependencies **/
 import { MainBottom } from '../bottom-tabs';
-import { ChatScreen } from '../../../chat';
 import { DrawerContent, HeaderRight } from './components';
 import { useThemeColors } from '../../../../configs';
+import { SettingScreen } from '../../../setting';
 
 /**
  * createDrawerNavigator is used in MainDrawer to sets up the drawer navigation.
@@ -79,7 +79,7 @@ const MainDrawer: React.FC = (): JSX.Element => {
       />
       <Drawer.Screen
         name="Profile"
-        component={ChatScreen}
+        component={SettingScreen}
         options={{
           title: 'Profile',
         }}

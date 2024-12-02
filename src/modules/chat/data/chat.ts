@@ -162,4 +162,126 @@ const chats: Chat[] = [
   },
 ];
 
-export { Chat, chats };
+const messagesByChatId = {
+  '1': [
+    {
+      id: 'm1',
+      text: 'Hi, how are you?',
+      createdAt: '2023-12-01T10:00:00Z',
+      senderId: '1',
+      read: true,
+    },
+    {
+      id: 'm2',
+      text: 'I’m doing well, and you?',
+      createdAt: '2023-12-01T10:01:00Z',
+      senderId: 'currentUser',
+      read: true,
+    },
+    {
+      id: 'm3',
+      text: 'I’m great, thanks for asking!',
+      createdAt: '2023-12-01T10:02:00Z',
+      senderId: '1',
+      read: true,
+    },
+  ],
+  '2': [
+    {
+      id: 'm4',
+      text: 'See you tomorrow!',
+      createdAt: '2023-12-01T08:30:00Z',
+      senderId: '2',
+      read: false,
+    },
+    {
+      id: 'm5',
+      text: 'Sure, see you at 9 AM.',
+      createdAt: '2023-12-01T08:35:00Z',
+      senderId: 'currentUser',
+      read: false,
+    },
+  ],
+  '3': [
+    {
+      id: 'm6',
+      text: 'I received your message, see you on Tuesday.',
+      createdAt: '2023-11-30T15:45:00Z',
+      senderId: 'currentUser',
+      read: false,
+    },
+    {
+      id: 'm7',
+      text: 'Perfect, let’s catch up then.',
+      createdAt: '2023-11-30T15:50:00Z',
+      senderId: '3',
+      read: true,
+    },
+  ],
+  '4': [
+    {
+      id: 'm8',
+      text: 'What a great day!',
+      createdAt: '2023-12-01T09:00:00Z',
+      senderId: '4',
+      read: false,
+    },
+    {
+      id: 'm9',
+      text: 'Absolutely! The weather is amazing.',
+      createdAt: '2023-12-01T09:05:00Z',
+      senderId: 'currentUser',
+      read: true,
+    },
+  ],
+  '5': [
+    {
+      id: 'm10',
+      text: 'Shall we go to the movies?',
+      createdAt: '2023-11-30T20:00:00Z',
+      senderId: '5',
+      read: true,
+    },
+    {
+      id: 'm11',
+      text: 'Sounds good! Which movie?',
+      createdAt: '2023-11-30T20:05:00Z',
+      senderId: 'currentUser',
+      read: true,
+    },
+  ],
+  '6': [
+    {
+      id: 'm12',
+      text: 'I’ll call you later.',
+      createdAt: '2023-11-30T18:00:00Z',
+      senderId: '6',
+      read: true,
+    },
+    {
+      id: 'm13',
+      text: 'Okay, talk to you soon.',
+      createdAt: '2023-11-30T18:10:00Z',
+      senderId: 'currentUser',
+      read: true,
+    },
+  ],
+  '7': [
+    {
+      id: 'm14',
+      text: 'Thanks for everything!',
+      createdAt: '2023-11-29T22:00:00Z',
+      senderId: '7',
+      read: true,
+    },
+    {
+      id: 'm15',
+      text: 'You’re welcome, anytime!',
+      createdAt: '2023-11-29T22:05:00Z',
+      senderId: 'currentUser',
+      read: true,
+    },
+  ],
+};
+
+export { Chat, chats, messagesByChatId };

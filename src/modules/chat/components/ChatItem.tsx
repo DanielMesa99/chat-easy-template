@@ -2,6 +2,15 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+/** Custom dependencies **/
+import { formatDate } from '../../../common';
+
+/**
+ * Interface for the ChatItem component props.
+ * Defines the properties passed to the ChatItem, including id, name, lastMessage, etc. of the chat.
+ *
+ * @interface ChatItemProps
+ */
 interface ChatItemProps {
   id: string;
   name: string;
@@ -11,20 +20,30 @@ interface ChatItemProps {
   avatarUrl: string;
   lastMessageIsMine: boolean;
   lastMessageRead: boolean;
-  onPress: (id: string) => void;
+  onPress: () => void;
 }
 
-const formatDate = (timestamp: string) => {
-  const date = new Date(timestamp);
-  const today = new Date();
-
-  if (date.toDateString() === today.toDateString()) {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  } else {
-    return date.toLocaleDateString();
-  }
-};
-
+/**
+ * ChatItem component renders a preview of a chat with various details like date and lastMessage.
+ *
+ * @component
+ * @example
+ * // Example usage:
+ * <ChatItem
+ *   id="1"
+ *   name="John Doe"
+ *   lastMessage="Hello there!"
+ *   timestamp="2024-12-01T09:57:00Z"
+ *   unread={true}
+ *   avatarUrl="https://example.com/avatar.jpg"
+ *   lastMessageIsMine={true}
+ *   lastMessageRead={false}
+ *   onPress={(id) => console.log(id)}
+ * />
+ *
+ * @param {ChatItemProps} props - The properties for the ChatItem component.
+ * @returns {React.ReactElement} The rendered chat item.
+ */
 const ChatItem: React.FC<ChatItemProps> = ({
   id,
   name,
@@ -35,12 +54,12 @@ const ChatItem: React.FC<ChatItemProps> = ({
   lastMessageIsMine,
   lastMessageRead,
   onPress,
-}) => {
+}: ChatItemProps): React.ReactElement => {
   return (
     <TouchableOpacity
       className="flex-row items-center h-24 p-4 mx-1 border-b border-light-line dark:border-dark-line"
       activeOpacity={0.7}
-      onPress={() => onPress(id)}
+      onPress={onPress}
     >
       <Image
         source={{ uri: avatarUrl }}

@@ -1,2 +1,2 @@
-export * from './ChatListScreen';
+export * from './ChatHomeScreen';
 export * from './ChatScreen';
