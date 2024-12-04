@@ -11,6 +11,15 @@ const en = {
     encrypted: 'All messages are encrypted',
     end_to_end: 'end-to-end.',
   },
+  header_title: {
+    chats: 'Conversations',
+    stories: 'Stories',
+    communities: 'Communities',
+    calls: 'Calls'
+  },
+  chat_screen: {
+    placeholder: 'Write your message'
+  },
 };
 
 export { en };
