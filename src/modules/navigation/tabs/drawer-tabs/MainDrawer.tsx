@@ -1,10 +1,12 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useTranslation } from 'react-i18next';
 
 /** Custom dependencies **/
 import { MainBottom } from '../bottom-tabs';
-import { DrawerContent, HeaderRight } from './components';
+import { DrawerContent, HeaderRight, HeaderTitle } from './components';
 import { useThemeColors } from '../../../../configs';
 import { SettingScreen } from '../../../setting';
+import { getActiveRouteName, getKeyForRoute } from './helpers';
 
 /**
  * createDrawerNavigator is used in MainDrawer to sets up the drawer navigation.
@@ -20,10 +22,12 @@ const Drawer = createDrawerNavigator();
  * // Example usage:
  * <MainDrawer />
  *
- * @returns {JSX.Element} - Drawer Navigator with custom header and content
+ * @returns {JSX.Element} - Drawer Navigator with custom header and content.
  */
 const MainDrawer: React.FC = (): JSX.Element => {
   const themeColors = useThemeColors();
+  // Translates the i18n keys into localized strings
+  const { t } = useTranslation();
 
   /**
    * Handler for the camera button press.
@@ -50,23 +54,32 @@ const MainDrawer: React.FC = (): JSX.Element => {
     <Drawer.Navigator
       initialRouteName="Home"
       detachInactiveScreens={false} // this fix flicker issues
-      screenOptions={{
-        drawerType: 'front',
-        headerShadowVisible: false,
-        drawerStyle: {
-          backgroundColor: themeColors.primaryContainer,
-        },
-        headerStyle: {
-          backgroundColor: themeColors.primaryContainer,
-        },
-        headerTintColor: themeColors.onPrimaryContainer,
-        headerRight: () => (
-          <HeaderRight
-            onCameraPress={handleCameraPress}
-            onSearchPress={handleSearchPress}
-            onSettingsPress={handleSettingsPress}
-          />
-        ),
+      defaultStatus='closed'
+      screenOptions={({ navigation }) => {
+        const routeKey = getKeyForRoute(getActiveRouteName(navigation.getState()));
+
+        return {
+          drawerType: 'front',
+          headerShadowVisible: true,
+          headerShown: !!routeKey, // Show header only if routeKey is not ''
+          drawerStyle: {
+            backgroundColor: themeColors.primaryContainer,
+          },
+          headerStyle: {
+            backgroundColor: themeColors.primaryContainer,
+          },
+          headerTintColor: themeColors.onPrimaryContainer,
+          headerRight: () => (
+            <HeaderRight
+              onCameraPress={handleCameraPress}
+              onSearchPress={handleSearchPress}
+              onSettingsPress={handleSettingsPress}
+            />
+          ),
+          headerTitle: () => (
+            <HeaderTitle route={getActiveRouteName(navigation.getState())} t={t} />
+          ),
+        };
       }}
       drawerContent={props => <DrawerContent {...props} />}
     >
