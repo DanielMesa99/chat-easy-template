@@ -2,7 +2,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 /** Custom dependencies **/
-import { ChatHomeScreen, ChatScreen } from '../../chat';
+import { ChatHomeScreen, ChatScreen } from '../../../chat';
+import { useThemeColors } from '../../../../configs';
 
 /** Define the parameters of the routes */
 type RootStackParams = {
@@ -24,8 +25,21 @@ const Stack = createStackNavigator();
  * @returns {JSX.Element} The rendered stack navigator component.
  */
 const ChatStack: React.FC = (): JSX.Element => {
+  const themeColors = useThemeColors();
+
   return (
-    <Stack.Navigator initialRouteName="ChatHome">
+    <Stack.Navigator
+      initialRouteName="ChatHome"
+      detachInactiveScreens={false}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: themeColors.primaryContainer,
+        },
+        headerTintColor: themeColors.onPrimaryContainer,
+        headerPressColor: themeColors.primary,
+        animation: 'slide_from_right'
+      }}
+    >
       <Stack.Screen
         name="ChatHome"
         component={ChatHomeScreen}
@@ -34,7 +48,6 @@ const ChatStack: React.FC = (): JSX.Element => {
       <Stack.Screen
         name="ChatView"
         component={ChatScreen}
-        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
