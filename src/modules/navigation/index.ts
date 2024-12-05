@@ -1,3 +1,3 @@
 export * from './navigator';
-export * from './stacks/chat-stack';
+export * from './stacks';
 export * from './tabs';

@@ -6,7 +6,7 @@ import { ChatHomeScreen, ChatScreen } from '../../../chat';
 import { useThemeColors } from '../../../../configs';
 
 /** Define the parameters of the routes */
-type RootStackParams = {
+type RootChatStackParams = {
   ChatHome: undefined;
   ChatView: { id: string; name: string };
 };
@@ -50,4 +50,4 @@ const ChatStack: React.FC = (): JSX.Element => {
   );
 };
 
-export { ChatStack, RootStackParams };
+export { ChatStack, RootChatStackParams };
