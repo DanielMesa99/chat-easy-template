@@ -12,7 +12,7 @@ import { getKeyForRoute } from '../helpers';
  * @interface HeaderTitleProps
  */
 interface HeaderTitleProps {
-    route: string | undefined;
+  route: string | undefined;
 }
 
 /**
@@ -26,14 +26,18 @@ interface HeaderTitleProps {
  * @param {HeaderTitleProps & BaseProps} props - The props for this component like the current route.
  * @returns {JSX.Element} - The name of the route as title for the header.
  */
-const HeaderTitle: React.FC<HeaderTitleProps & BaseProps> = React.memo(({ route, t }: HeaderTitleProps & BaseProps): JSX.Element => {
+const HeaderTitle: React.FC<HeaderTitleProps & BaseProps> = React.memo(
+  ({ route, t }: HeaderTitleProps & BaseProps): JSX.Element => {
     const key = getKeyForRoute(route);
 
     return (
-        <View>
-            <Text className='font-bold text-2xl color-light-onBackground dark:color-dark-onBackground'>{key ? t(`header_title.${key}`) : ''}</Text>
-        </View>
-    )
-});
+      <View>
+        <Text className="font-bold text-2xl color-light-onBackground dark:color-dark-onBackground">
+          {key ? t(`header_title.${key}`) : ''}
+        </Text>
+      </View>
+    );
+  },
+);
 
 export { HeaderTitle };

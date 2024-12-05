@@ -54,9 +54,11 @@ const MainDrawer: React.FC = (): JSX.Element => {
     <Drawer.Navigator
       initialRouteName="Home"
       detachInactiveScreens={false} // this fix flicker issues
-      defaultStatus='closed'
+      defaultStatus="closed"
       screenOptions={({ navigation }) => {
-        const routeKey = getKeyForRoute(getActiveRouteName(navigation.getState()));
+        const routeKey = getKeyForRoute(
+          getActiveRouteName(navigation.getState()),
+        );
 
         return {
           drawerType: 'front',
@@ -77,7 +79,10 @@ const MainDrawer: React.FC = (): JSX.Element => {
             />
           ),
           headerTitle: () => (
-            <HeaderTitle route={getActiveRouteName(navigation.getState())} t={t} />
+            <HeaderTitle
+              route={getActiveRouteName(navigation.getState())}
+              t={t}
+            />
           ),
         };
       }}

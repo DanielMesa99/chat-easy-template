@@ -37,7 +37,7 @@ const ChatStack: React.FC = (): JSX.Element => {
         },
         headerTintColor: themeColors.onPrimaryContainer,
         headerPressColor: themeColors.primary,
-        animation: 'slide_from_right'
+        animation: 'none',
       }}
     >
       <Stack.Screen
@@ -45,10 +45,7 @@ const ChatStack: React.FC = (): JSX.Element => {
         component={ChatHomeScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="ChatView"
-        component={ChatScreen}
-      />
+      <Stack.Screen name="ChatView" component={ChatScreen} />
     </Stack.Navigator>
   );
 };
