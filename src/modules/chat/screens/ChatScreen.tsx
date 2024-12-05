@@ -11,12 +11,12 @@ import { getFormattedTime } from '../helpers';
 
 /**
  * ChatScreen where user can send and view messages.
- * 
+ *
  * @screen
  * @example
  * // Example usage:
  * <ChatScreen />
- * 
+ *
  * @returns {JSX.Element} The rendered ChatScreen with list of messages and chat bar.
  */
 const ChatScreen: React.FC = (): JSX.Element => {
@@ -29,15 +29,15 @@ const ChatScreen: React.FC = (): JSX.Element => {
     setInputValue,
     handleSend,
     loadMoreMessages,
-    flatListRef
-  } = useChatLogic(conversation);
+    flatListRef,
+  } = useChatLogic(conversation.reverse());
 
   return (
     <View className="flex-1 bg-light-background dark:bg-dark-background">
       <FlatList
         data={displayedMessages}
         ref={flatListRef}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         renderItem={({ item, index }) => {
           const isSameSender =
             index < displayedMessages.length - 1 &&

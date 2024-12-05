@@ -5,6 +5,14 @@ const en = {
     communities: 'Community',
     calls: 'Calls',
   },
+  drawer: {
+    home: 'Home',
+    profile: 'Profile',
+    contacts: 'Contacts',
+    calls: 'Calls',
+    saved_messages: 'Saved messages',
+    settings: 'Settings',
+  },
   chat_list: {
     empty_chat: `Oops, it looks like you don't have any saved chats.`,
     empty_group: `Oops, it looks like you are not in any groups.`,

@@ -18,6 +18,10 @@ import { IconName, LanguageSwitcher, ThemeSwitcher } from '../../../../../common
 const iconMap: { [key: string]: string } = {
   Home: 'home',
   Profile: 'person',
+  Contacts: 'people',
+  Calls: 'call',
+  SavedMessages: 'bookmark',
+  Settings: 'settings',
 };
 
 /**
@@ -54,6 +58,8 @@ const DrawerContent: React.FC<DrawerContentProps> = React.memo(
 
     return (
       <DrawerContentScrollView {...props}>
+        <View className='h-40 w-full mb-5 rounded-lg bg-light-primary dark:bg-dark-primary'>
+        </View>
         {props.state.routes.map((route, index) => {
           const focused = props.state.index === index;
           const onPress = () => props.navigation.navigate(route.name);
@@ -69,9 +75,11 @@ const DrawerContent: React.FC<DrawerContentProps> = React.memo(
             />
           );
         })}
-        <View className="flex-row justify-between items-center border-t border-light-primary">
-          <LanguageSwitcher />
-          <ThemeSwitcher />
+        <View className='border-t border-light-primary dark:border-dark-primary'>
+          <View className="flex-row justify-between items-center mt-5">
+            <LanguageSwitcher />
+            <ThemeSwitcher />
+          </View>
         </View>
       </DrawerContentScrollView>
     );
