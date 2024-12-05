@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 /** Custom dependencies **/
-import { BaseProps } from '../interfaces';
+import { BaseProps } from '../../../common';
 
 /**
  * Footer renders a footer section with message about encryption.

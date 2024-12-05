@@ -1,13 +1,4 @@
-interface Chat {
-  id: string;
-  name: string;
-  lastMessage: string;
-  timestamp: string;
-  unread: boolean;
-  avatarUrl: string;
-  lastMessageIsMine: boolean;
-  lastMessageRead: boolean;
-}
+import { Chat, Message } from "../../../common";
 
 const chats: Chat[] = [
   {
@@ -162,126 +153,41 @@ const chats: Chat[] = [
   },
 ];
 
-const messagesByChatId = {
-  '1': [
-    {
-      id: 'm1',
-      text: 'Hi, how are you?',
-      createdAt: '2023-12-01T10:00:00Z',
-      senderId: '1',
-      read: true,
-    },
-    {
-      id: 'm2',
-      text: 'I’m doing well, and you?',
-      createdAt: '2023-12-01T10:01:00Z',
-      senderId: 'currentUser',
-      read: true,
-    },
-    {
-      id: 'm3',
-      text: 'I’m great, thanks for asking!',
-      createdAt: '2023-12-01T10:02:00Z',
-      senderId: '1',
-      read: true,
-    },
-  ],
-  '2': [
-    {
-      id: 'm4',
-      text: 'See you tomorrow!',
-      createdAt: '2023-12-01T08:30:00Z',
-      senderId: '2',
-      read: false,
-    },
-    {
-      id: 'm5',
-      text: 'Sure, see you at 9 AM.',
-      createdAt: '2023-12-01T08:35:00Z',
-      senderId: 'currentUser',
-      read: false,
-    },
-  ],
-  '3': [
-    {
-      id: 'm6',
-      text: 'I received your message, see you on Tuesday.',
-      createdAt: '2023-11-30T15:45:00Z',
-      senderId: 'currentUser',
-      read: false,
-    },
-    {
-      id: 'm7',
-      text: 'Perfect, let’s catch up then.',
-      createdAt: '2023-11-30T15:50:00Z',
-      senderId: '3',
-      read: true,
-    },
-  ],
-  '4': [
-    {
-      id: 'm8',
-      text: 'What a great day!',
-      createdAt: '2023-12-01T09:00:00Z',
-      senderId: '4',
-      read: false,
-    },
-    {
-      id: 'm9',
-      text: 'Absolutely! The weather is amazing.',
-      createdAt: '2023-12-01T09:05:00Z',
-      senderId: 'currentUser',
-      read: true,
-    },
-  ],
-  '5': [
-    {
-      id: 'm10',
-      text: 'Shall we go to the movies?',
-      createdAt: '2023-11-30T20:00:00Z',
-      senderId: '5',
-      read: true,
-    },
-    {
-      id: 'm11',
-      text: 'Sounds good! Which movie?',
-      createdAt: '2023-11-30T20:05:00Z',
-      senderId: 'currentUser',
-      read: true,
-    },
-  ],
-  '6': [
-    {
-      id: 'm12',
-      text: 'I’ll call you later.',
-      createdAt: '2023-11-30T18:00:00Z',
-      senderId: '6',
-      read: true,
-    },
-    {
-      id: 'm13',
-      text: 'Okay, talk to you soon.',
-      createdAt: '2023-11-30T18:10:00Z',
-      senderId: 'currentUser',
-      read: true,
-    },
-  ],
-  '7': [
-    {
-      id: 'm14',
-      text: 'Thanks for everything!',
-      createdAt: '2023-11-29T22:00:00Z',
-      senderId: '7',
-      read: true,
-    },
-    {
-      id: 'm15',
-      text: 'You’re welcome, anytime!',
-      createdAt: '2023-11-29T22:05:00Z',
-      senderId: 'currentUser',
-      read: true,
-    },
-  ],
-};
+const conversation: Message[] = [
+  { id: '1', content: 'Hi, how are you?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:00:00Z') },
+  { id: '2', content: 'Hello! I’m good, and you?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:01:00Z') },
+  { id: '3', content: 'All good, thanks. What have you done today?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:02:00Z') },
+  { id: '4', content: 'I went to the park with my dog. How about you?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:03:00Z') },
+  { id: '5', content: 'Worked a bit and then exercised.', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:04:00Z') },
+  { id: '6', content: 'Sounds productive. What kind of exercise?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:05:00Z') },
+  { id: '7', content: 'A bit of yoga and running. Do you like to exercise?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:06:00Z') },
+  { id: '8', content: 'Yes, I love swimming. Have you tried it?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:07:00Z') },
+  { id: '9', content: `I have, but I'm not very good. Any tips?`, readed: true, isMine: true, timestamp: new Date('2024-12-04T18:08:00Z') },
+  { id: '10', content: 'Sure, practice your breathing. Do you have access to a pool?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:09:00Z') },
+  { id: '11', content: 'Yes, there’s one near my house. How often do you swim?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:10:00Z') },
+  { id: '12', content: 'I try to go at least three times a week. It’s very relaxing.', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:11:00Z') },
+  { id: '13', content: 'I should try it more often. What else do you like to do in your free time?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:12:00Z') },
+  { id: '14', content: 'I like reading and cooking. What about you?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:13:00Z') },
+  { id: '15', content: 'I also enjoy cooking. What’s your favorite dish to make?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:14:00Z') },
+  { id: '16', content: 'I love making homemade pasta. Do you have a favorite recipe?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:15:00Z') },
+  { id: '17', content: 'Yes, I really like making paella. It’s a very versatile dish.', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:16:00Z') },
+  { id: '18', content: 'I’ve never tried making it. Is it difficult?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:17:00Z') },
+  { id: '19', content: 'Not too much, it just requires time and patience. I recommend it!', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:18:00Z') },
+  { id: '20', content: 'Thanks! Maybe I’ll try it this weekend.', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:19:00Z') },
+  { id: '21', content: 'Great! If you need any tips, just let me know.', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:20:00Z') },
+  { id: '22', content: 'I will. Thanks for the chat!', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:21:00Z') },
+  { id: '23', content: 'Really Thanks', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:21:30Z') },
+  { id: '24', content: 'You’re welcome! Talk soon.', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:22:00Z') },
+  { id: '25', content: 'By the way, do you enjoy outdoor activities?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:23:00Z') },
+  { id: '26', content: 'Yes, I love hiking! How about you?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:24:00Z') },
+  { id: '27', content: 'I’m into cycling. Have you tried mountain biking?', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:25:00Z') },
+  { id: '28', content: 'Not yet, but it sounds thrilling. Do you go often?', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:26:00Z') },
+  { id: '29', content: 'Every weekend, it’s a great workout.', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:27:00Z') },
+  { id: '30', content: 'Maybe I’ll join you sometime.', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:28:00Z') },
+  { id: '31', content: 'That would be fun! Let’s plan for it.', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:29:00Z') },
+  { id: '32', content: 'Sounds good. I’ll let you know when I’m free.', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:30:00Z') },
+  { id: '33', content: 'Perfect. See you soon!', readed: true, isMine: false, timestamp: new Date('2024-12-04T18:31:00Z') },
+  { id: '34', content: 'See you!', readed: true, isMine: true, timestamp: new Date('2024-12-04T18:32:00Z') },
+];
 
-export { Chat, chats, messagesByChatId };
+export { chats, conversation };

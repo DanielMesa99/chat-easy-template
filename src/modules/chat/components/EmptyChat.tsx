@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 /** Custom dependencies **/
-import { BaseProps } from '../interfaces';
+import { BaseProps } from '../../../common';
 
 /**
  * Interface for the EmptyChat component props.
