@@ -2,24 +2,23 @@ import React, { useState } from 'react';
 import {
   View,
   FlatList,
-  Text,
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 /** Custom dependencies **/
-import { ChatItem } from '../components';
-import { Chat, chats } from '../data';
+import { ChatItem, EmptyChat, Footer } from '../components';
+import { chats } from '../data';
 import { useGlobalContext } from '../../../configs';
-import { RootStackParams } from '../../navigation';
+import { RootChatStackParams } from '../../navigation';
+import { Chat } from '../interfaces';
 
 /* Define the navigation type for the ChargeScreen */
 type ChatScreenNavigationProp = StackNavigationProp<
-  RootStackParams,
+  RootChatStackParams,
   'ChatHome'
 >;
 
@@ -29,7 +28,7 @@ type ChatScreenNavigationProp = StackNavigationProp<
  * unread messages, and the timestamp. If there are no chats, it shows a placeholder message.
  *
  * The component handles scroll events to determine the scrolling direction and updates
- * the global state (`isScrollingDown`) accordingly.
+ * the global state (isScrollingDown) accordingly.
  *
  * @screen
  * @example
@@ -46,7 +45,7 @@ const ChatHomeScreen: React.FC = (): JSX.Element => {
   // Translation hook for handling internationalization
   const { t } = useTranslation();
   // Global context hook to set the scroll direction in the app context
-  const { setIsScrollingDown } = useGlobalContext();
+  const { isScrollingDown, setIsScrollingDown } = useGlobalContext();
 
   const navigation = useNavigation<ChatScreenNavigationProp>();
 
@@ -69,7 +68,12 @@ const ChatHomeScreen: React.FC = (): JSX.Element => {
         : currentOffset > scrollPosition
           ? 'down'
           : 'up';
-    setIsScrollingDown(direction === 'down'); // Update the scroll direction in the global context
+    if (
+      (direction === 'down' && !isScrollingDown) ||
+      (direction === 'up' && isScrollingDown)
+    ) {
+      setIsScrollingDown(direction === 'down'); // Update the scroll direction in the global context
+    }
     setScrollPosition(currentOffset);
   };
 
@@ -77,14 +81,7 @@ const ChatHomeScreen: React.FC = (): JSX.Element => {
     <View className="flex-1 bg-light-background dark:bg-dark-background">
       {chatState.length === 0 ? (
         /* Show a message if there are no chats */
-        <View className="flex-1 justify-center items-center">
-          <Text className="text-center text-light-onBackground dark:text-dark-onBackground">
-            {t('chat_list.empty')}
-          </Text>
-          <Text className="mt-3 text-center text-light-onBackground dark:text-dark-onBackground">
-            {t('chat_list.new_chat')}
-          </Text>
-        </View>
+        <EmptyChat t={t} type="chat" />
       ) : (
         <FlatList
           data={chatState}
@@ -103,19 +100,11 @@ const ChatHomeScreen: React.FC = (): JSX.Element => {
             />
           )}
           onScroll={handleScroll}
+          initialNumToRender={10}
+          maxToRenderPerBatch={5}
           ListFooterComponent={
             /* Footer displaying information about encryption */
-            <View className="flex-row justify-center h-56 mt-3">
-              <Text className="text-light-onBackground dark:text-dark-onBackground">
-                <Ionicons name={'lock-closed'} size={16} className="mt-1" />
-              </Text>
-              <Text className="ml-3 text-center text-light-onBackground dark:text-dark-onBackground">
-                {t('chat_list.encrypted')}{' '}
-                <Text className="color-light-primary dark:color-dark-primary">
-                  {t('chat_list.end_to_end')}
-                </Text>
-              </Text>
-            </View>
+            <Footer t={t} />
           }
         />
       )}
