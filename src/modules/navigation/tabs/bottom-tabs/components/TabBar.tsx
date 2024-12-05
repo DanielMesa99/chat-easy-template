@@ -43,11 +43,11 @@ const TabBar: React.FC<MaterialTopTabBarProps & TabBarProps> = React.memo(
     const animatedStyle = useTabBarAnimation(isScrollingDown);
 
     return (
-      <Animated.View style={[animatedStyle]}>
-        <View className="mr-5">
+      <Animated.View style={[animatedStyle]} className='self-center w-11/12'>
+        <View className="absolute self-end bottom-28 rounded-full bg-red-400">
           <TouchableOpacity
-            className="absolute bottom-28 self-end sm:mr-16 md:mr-28 lg:mr-64 p-5 rounded-full elevation bg-light-primary dark:bg-dark-primary"
-            onPress={() => {}}
+            className="p-5 rounded-full elevation bg-light-primary dark:bg-dark-primary"
+            onPress={() => { }}
             activeOpacity={0.7}
           >
             <Text className={'text-light-onPrimary dark:text-dark-onPrimary'}>
@@ -55,7 +55,7 @@ const TabBar: React.FC<MaterialTopTabBarProps & TabBarProps> = React.memo(
             </Text>
           </TouchableOpacity>
         </View>
-        <View className="absolute bottom-5 self-center flex-row h-20 w-11/12 sm:w-9/12 md:w-8/12 lg:w-6/12 px-3 items-center rounded-2xl elevation bg-light-primaryContainer dark:bg-dark-primaryContainer">
+        <View className="absolute bottom-5 flex-row h-20 w-full px-3 items-center rounded-2xl elevation bg-light-primaryContainer dark:bg-dark-primaryContainer">
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const label =

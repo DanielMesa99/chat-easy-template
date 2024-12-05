@@ -13,6 +13,7 @@ import { IconName } from '../../../../../common';
 /**
  * Map of route names to icon names.
  * This object maps the name of the route to the corresponding icon to display in the Drawer.
+ * 
  * @type {Object<string, string>}
  */
 const iconMap: { [key: string]: string } = {
