@@ -7,7 +7,7 @@ import { useThemeColors } from '../../../../configs';
 
 /** Define the parameters of the routes */
 type RootCommunityStackParams = {
-    CommunityHome: undefined;
+  CommunityHome: undefined;
 };
 
 const Stack = createStackNavigator();
@@ -24,28 +24,28 @@ const Stack = createStackNavigator();
  * @returns {JSX.Element} The rendered stack navigator component.
  */
 const CommunityStack: React.FC = (): JSX.Element => {
-    const themeColors = useThemeColors();
+  const themeColors = useThemeColors();
 
-    return (
-        <Stack.Navigator
-            initialRouteName="CommunityHome"
-            detachInactiveScreens={false}
-            screenOptions={{
-                headerStyle: {
-                    backgroundColor: themeColors.primaryContainer,
-                },
-                headerTintColor: themeColors.onPrimaryContainer,
-                headerPressColor: themeColors.primary,
-                animation: 'none',
-            }}
-        >
-            <Stack.Screen
-                name="CommunityHome"
-                component={CommunityScreen}
-                options={{ headerShown: false }}
-            />
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator
+      initialRouteName="CommunityHome"
+      detachInactiveScreens={false}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: themeColors.primaryContainer,
+        },
+        headerTintColor: themeColors.onPrimaryContainer,
+        headerPressColor: themeColors.primary,
+        animation: 'none',
+      }}
+    >
+      <Stack.Screen
+        name="CommunityHome"
+        component={CommunityScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
 };
 
 export { RootCommunityStackParams, CommunityStack };

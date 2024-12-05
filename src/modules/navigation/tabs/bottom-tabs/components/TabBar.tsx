@@ -43,11 +43,11 @@ const TabBar: React.FC<MaterialTopTabBarProps & TabBarProps> = React.memo(
     const animatedStyle = useTabBarAnimation(isScrollingDown);
 
     return (
-      <Animated.View style={[animatedStyle]} className='self-center w-11/12'>
+      <Animated.View style={[animatedStyle]} className="self-center w-11/12">
         <View className="absolute self-end bottom-28 rounded-full bg-red-400">
           <TouchableOpacity
             className="p-5 rounded-full elevation bg-light-primary dark:bg-dark-primary"
-            onPress={() => { }}
+            onPress={() => {}}
             activeOpacity={0.7}
           >
             <Text className={'text-light-onPrimary dark:text-dark-onPrimary'}>

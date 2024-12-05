@@ -11,7 +11,7 @@ import { ColorScheme } from '../../configs';
  */
 interface BaseProps {
   t: TFunction<'translation', undefined>;
-  themeColors?: ColorScheme
+  themeColors?: ColorScheme;
 }
 
 export { BaseProps };
