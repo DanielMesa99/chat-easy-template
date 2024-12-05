@@ -7,10 +7,9 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 /** Custom dependencies **/
 import { TabBar } from './components';
 import { StorieScreen } from '../../../storie';
-import { CommunityScreen } from '../../../community';
 import { CallScreen } from '../../../call';
 import { useGlobalContext } from '../../../../configs';
-import { ChatStack } from '../../stacks';
+import { ChatStack, CommunityStack } from '../../stacks';
 
 /**
  * createMaterialTopTabNavigator is used in MainBottom to leverage its native swipeable tab functionality,
@@ -72,7 +71,7 @@ const MainBottom: React.FC = (): React.JSX.Element => {
       />
       <Tab.Screen
         name="Community"
-        component={CommunityScreen}
+        component={CommunityStack}
         options={{ title: t('menu.communities') }}
       />
       <Tab.Screen

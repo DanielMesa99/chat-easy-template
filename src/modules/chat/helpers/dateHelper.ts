@@ -20,4 +20,23 @@ const formatDate = (timestamp: string): string => {
   }
 };
 
-export { formatDate };
+/**
+ * Formats the timestamp of a message into a human-readable time.
+ * 
+ * @helper
+ * @example
+ * // Example usage:
+ * const date = getFormattedTime(date);
+ * 
+ * @param {Date} date - The timestamp of the message to be formatted.
+ * @returns {string} The formatted time in 12-hour format (e.g., "10:30 AM").
+ */
+const getFormattedTime = (date: Date): string => {
+  return date.toLocaleTimeString('es-SP', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+};
+
+export { formatDate, getFormattedTime };

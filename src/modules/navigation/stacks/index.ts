@@ -1,1 +1,1 @@
-export * from './ChatStack';
+export * from './chat-stack';
