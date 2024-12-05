@@ -3,17 +3,16 @@ import {
   DrawerContentScrollView,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import { Switch } from 'react-native';
-import { useColorScheme } from 'nativewind';
+import { View } from 'react-native';
 
 /** Custom dependencies **/
 import { DrawerItem } from './DrawerItem';
-import { IconName } from '../../../../../common';
+import { IconName, LanguageSwitcher, ThemeSwitcher } from '../../../../../common';
 
 /**
  * Map of route names to icon names.
  * This object maps the name of the route to the corresponding icon to display in the Drawer.
- * 
+ *
  * @type {Object<string, string>}
  */
 const iconMap: { [key: string]: string } = {
@@ -27,7 +26,7 @@ const iconMap: { [key: string]: string } = {
  *
  * @extends {DrawerContentComponentProps}
  */
-interface DrawerContentProps extends DrawerContentComponentProps {}
+interface DrawerContentProps extends DrawerContentComponentProps { }
 
 /**
  * DrawerContent component that renders the content of the drawer (navigation menu).
@@ -52,7 +51,6 @@ interface DrawerContentProps extends DrawerContentComponentProps {}
  */
 const DrawerContent: React.FC<DrawerContentProps> = React.memo(
   (props: DrawerContentProps): JSX.Element => {
-    const { colorScheme, toggleColorScheme } = useColorScheme();
 
     return (
       <DrawerContentScrollView {...props}>
@@ -71,7 +69,10 @@ const DrawerContent: React.FC<DrawerContentProps> = React.memo(
             />
           );
         })}
-        <Switch value={colorScheme == 'dark'} onChange={toggleColorScheme} />
+        <View className="flex-row justify-between items-center border-t border-light-primary">
+          <LanguageSwitcher />
+          <ThemeSwitcher />
+        </View>
       </DrawerContentScrollView>
     );
   },
