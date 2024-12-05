@@ -15,6 +15,7 @@ const getKeyForRoute = (route: string | undefined): string => {
     Chats: 'chats',
     Stories: 'stories',
     Community: 'communities',
+    CommunityHome: 'communities',
     Calls: 'calls',
   };
 
