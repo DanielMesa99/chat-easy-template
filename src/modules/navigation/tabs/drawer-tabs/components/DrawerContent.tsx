@@ -3,7 +3,7 @@ import {
   DrawerContentScrollView,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import { View } from 'react-native';
+import { ImageBackground, Text, View } from 'react-native';
 
 /** Custom dependencies **/
 import { DrawerItem } from './DrawerItem';
@@ -58,8 +58,7 @@ const DrawerContent: React.FC<DrawerContentProps> = React.memo(
 
     return (
       <DrawerContentScrollView {...props}>
-        <View className='h-40 w-full mb-5 rounded-lg bg-light-primary dark:bg-dark-primary'>
-        </View>
+        <ImageBackground imageStyle={{ borderRadius: 10 }} source={require('../../../../../common/assets/images/user.jpg')} className='h-40 w-full mb-5' />
         {props.state.routes.map((route, index) => {
           const focused = props.state.index === index;
           const onPress = () => props.navigation.navigate(route.name);
