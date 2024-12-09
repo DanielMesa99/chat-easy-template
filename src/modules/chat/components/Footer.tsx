@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 /** Custom dependencies **/
 import { BaseProps } from '../../../common';
+import { colorClass } from '../../../configs';
 
 /**
  * Footer renders a footer section with message about encryption.
@@ -19,14 +20,17 @@ import { BaseProps } from '../../../common';
  */
 const Footer: React.FC<BaseProps> = React.memo(
   ({ t }: BaseProps): JSX.Element => {
+    // Get NativeWind classes for theme colors
+    const { on_bg, primary } = colorClass;
+
     return (
       <View className="flex-row justify-center h-28 mt-3">
-        <Text className="text-light-onBackground dark:text-dark-onBackground">
+        <Text className={`${on_bg}`}>
           <Ionicons name={'lock-closed'} size={16} className="mt-1" />
         </Text>
-        <Text className="ml-3 text-center text-light-onBackground dark:text-dark-onBackground">
+        <Text className={`ml-3 text-center ${on_bg}`}>
           {t('chat_list.encrypted')}{' '}
-          <Text className="color-light-primary dark:color-dark-primary">
+          <Text className={`${primary}`}>
             {t('chat_list.end_to_end')}
           </Text>
         </Text>

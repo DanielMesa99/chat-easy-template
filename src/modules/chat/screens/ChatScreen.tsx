@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 /** Custom dependencies **/
 import { conversation } from '../data';
-import { useThemeColors } from '../../../configs';
+import { colorClass, useThemeColors } from '../../../configs';
 import { useChatLogic } from '../hooks';
 import { ChatBar, ChatMessage } from '../components';
 import { getFormattedTime } from '../helpers';
@@ -22,6 +22,8 @@ import { getFormattedTime } from '../helpers';
 const ChatScreen: React.FC = (): JSX.Element => {
   const themeColors = useThemeColors();
   const { t } = useTranslation();
+  // Get NativeWind classes for theme colors
+  const { bg } = colorClass;
 
   const {
     displayedMessages,
@@ -33,7 +35,7 @@ const ChatScreen: React.FC = (): JSX.Element => {
   } = useChatLogic(conversation.reverse());
 
   return (
-    <View className="flex-1 bg-light-background dark:bg-dark-background">
+    <View className={`flex-1 ${bg}`}>
       <FlatList
         data={displayedMessages}
         ref={flatListRef}

@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 /** Custom dependencies **/
 import { IconName } from '../../../../../common';
+import { colorClass } from '../../../../../configs';
 
 /**
  * The interface for the props of the DrawerItem component.
@@ -43,6 +44,9 @@ interface DrawerItemProps {
  */
 const DrawerItem: React.FC<DrawerItemProps> = React.memo(
   ({ label, onPress, focused, iconName }): React.JSX.Element => {
+    // Get NativeWind classes for theme colors
+    const { primary, on_bg } = colorClass;
+
     const iconToUse = focused ? iconName : (`${iconName}-outline` as IconName);
 
     return (
@@ -51,15 +55,15 @@ const DrawerItem: React.FC<DrawerItemProps> = React.memo(
           className={`flex-row items-center p-4 mb-3 rounded-lg ${focused ? 'bg-light-primary/20' : 'bg-transparent'}`}
         >
           <Text
-            className={`mr-5 ${focused ? 'text-light-primary dark:text-dark-primary' : 'text-light-onBackground dark:text-dark-onBackground'}`}
+            className={`mr-5 ${focused ? `${primary}` : `${on_bg}`}`}
           >
             <Ionicons name={iconToUse} size={24} />
           </Text>
           <Text
             className={
               focused
-                ? 'text-light-primary dark:text-dark-primary'
-                : 'text-light-onBackground dark:text-dark-onBackground'
+                ? `${primary}`
+                : `${on_bg}`
             }
           >
             {label}

@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 /** Custom dependencies **/
 import { BaseProps } from '../../../../../common';
 import { getKeyForRoute } from '../helpers';
+import { colorClass } from '../../../../../configs';
 
 /**
  * The interface for the props of the HeaderTitle component.
@@ -28,11 +29,14 @@ interface HeaderTitleProps {
  */
 const HeaderTitle: React.FC<HeaderTitleProps & BaseProps> = React.memo(
   ({ route, t }: HeaderTitleProps & BaseProps): JSX.Element => {
+    // Get NativeWind classes for theme colors
+    const { on_bg } = colorClass;
+
     const key = getKeyForRoute(route);
 
     return (
       <View>
-        <Text className="font-bold text-2xl color-light-onBackground dark:color-dark-onBackground">
+        <Text className={`font-bold text-2xl ${on_bg}`}>
           {key ? t(`header_title.${key}`) : ''}
         </Text>
       </View>

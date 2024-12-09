@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 /** Custom dependencies **/
 import { Message } from '../interfaces';
+import { colorClass } from '../../../configs';
 
 /**
  * The interface for the props of the ChatMessage component.
@@ -36,32 +37,33 @@ interface ChatMessageProps {
  */
 const ChatMessage: React.FC<ChatMessageProps> = React.memo(
   ({ item, isSameSender, getFormattedTime }) => {
-    const containerClass = `flex-row ${
-      item.isMine ? 'justify-end' : 'justify-start'
-    } ${isSameSender ? 'm-2 mt-0' : 'm-2'}`;
+    // Get NativeWind classes for theme colors
+    const { primary_full, on_primary, secondary_full, details } = colorClass;
 
-    const bubbleClass = `p-2 rounded-lg ${
-      item.isMine
-        ? 'ml-5 bg-light-primary dark:bg-dark-primary'
-        : 'mr-5 bg-light-secondary dark:bg-dark-secondary'
-    }`;
+    const containerClass = `flex-row ${item.isMine ? 'justify-end' : 'justify-start'
+      } ${isSameSender ? 'm-2 mt-0' : 'm-2'}`;
+
+    const bubbleClass = `p-2 rounded-lg ${item.isMine
+      ? `ml-5 ${primary_full}`
+      : `mr-5 ${secondary_full}`
+      }`;
 
     return (
       <View className={containerClass}>
         <View className={bubbleClass}>
-          <Text className="text-lg text-light-onPrimary dark:text-dark-onPrimary">
+          <Text className={`text-lg ${on_primary}`}>
             {item.content}
           </Text>
           <View className="flex-row justify-end items-center">
             {item.isMine && (
-              <Text className="text-light-details dark:text-dark-details">
+              <Text className={`${details}`}>
                 <Ionicons
                   name={item.readed ? 'checkmark-done' : 'checkmark'}
                   size={12}
                 />
               </Text>
             )}
-            <Text className="text-xs ml-1 text-light-details dark:text-dark-details">
+            <Text className={`text-xs ml-1 ${details}`}>
               {getFormattedTime(item.timestamp)}
             </Text>
           </View>

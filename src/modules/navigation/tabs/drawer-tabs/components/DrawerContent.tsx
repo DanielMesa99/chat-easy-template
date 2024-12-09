@@ -3,11 +3,12 @@ import {
   DrawerContentScrollView,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import { ImageBackground, Text, View } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 
 /** Custom dependencies **/
 import { DrawerItem } from './DrawerItem';
 import { IconName, LanguageSwitcher, ThemeSwitcher } from '../../../../../common';
+import { colorClass } from '../../../../../configs';
 
 /**
  * Map of route names to icon names.
@@ -55,6 +56,8 @@ interface DrawerContentProps extends DrawerContentComponentProps { }
  */
 const DrawerContent: React.FC<DrawerContentProps> = React.memo(
   (props: DrawerContentProps): JSX.Element => {
+    // Get NativeWind classes for theme colors
+    const { border_active } = colorClass;
 
     return (
       <DrawerContentScrollView {...props}>
@@ -74,7 +77,7 @@ const DrawerContent: React.FC<DrawerContentProps> = React.memo(
             />
           );
         })}
-        <View className='border-t border-light-primary dark:border-dark-primary'>
+        <View className={`border-t ${border_active}`}>
           <View className="flex-row justify-between items-center mt-5">
             <LanguageSwitcher />
             <ThemeSwitcher />

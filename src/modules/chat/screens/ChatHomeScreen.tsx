@@ -12,7 +12,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 /** Custom dependencies **/
 import { ChatItem, EmptyChat, Footer } from '../components';
 import { chats } from '../data';
-import { useGlobalContext } from '../../../configs';
+import { colorClass, useGlobalContext } from '../../../configs';
 import { RootChatStackParams } from '../../navigation';
 import { Chat } from '../interfaces';
 
@@ -46,6 +46,8 @@ const ChatHomeScreen: React.FC = (): JSX.Element => {
   const { t } = useTranslation();
   // Global context hook to set the scroll direction in the app context
   const { isScrollingDown, setIsScrollingDown } = useGlobalContext();
+  // Get NativeWind classes for theme colors
+  const { bg } = colorClass;
 
   const navigation = useNavigation<ChatScreenNavigationProp>();
 
@@ -78,7 +80,7 @@ const ChatHomeScreen: React.FC = (): JSX.Element => {
   };
 
   return (
-    <View className="flex-1 bg-light-background dark:bg-dark-background">
+    <View className={`flex-1 ${bg}`}>
       {chatState.length === 0 ? (
         /* Show a message if there are no chats */
         <EmptyChat t={t} type="chat" />
