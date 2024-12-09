@@ -4,6 +4,7 @@ import { Animated, Pressable, Text } from 'react-native';
 /** Custom dependencies **/
 import { useTabBarItemAnimation } from '../hooks';
 import { BottomIconKeys, bottomIcons } from '../types';
+import { colorClass } from '../../../../../configs';
 
 /**
  * Interface for the props of the TabBarItem component.
@@ -46,6 +47,9 @@ const TabBarItem: React.FC<TabBarItemProps> = React.memo(
     const { scaleIconAnim, scaleTextAnim, opacityTextAnim } =
       useTabBarItemAnimation(isFocused);
 
+    // Get NativeWind classes for theme colors
+    const { primary, on_bg } = colorClass;
+
     return (
       <Pressable
         onPress={onPress}
@@ -75,8 +79,8 @@ const TabBarItem: React.FC<TabBarItemProps> = React.memo(
             <Text
               className={
                 isFocused
-                  ? 'text-light-primary dark:text-dark-primary'
-                  : 'text-light-onBackground dark:text-dark-onBackground'
+                  ? `${primary}`
+                  : `${on_bg}`
               }
             >
               {label}

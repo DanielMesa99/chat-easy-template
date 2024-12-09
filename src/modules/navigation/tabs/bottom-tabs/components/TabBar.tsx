@@ -7,6 +7,7 @@ import Animated from 'react-native-reanimated';
 /** Custom dependencies **/
 import { TabBarItem } from './TabBarItem';
 import { useTabBarAnimation } from '../hooks';
+import { colorClass } from '../../../../../configs';
 
 /**
  * Interface for the TabBar component props.
@@ -42,20 +43,23 @@ const TabBar: React.FC<MaterialTopTabBarProps & TabBarProps> = React.memo(
     // Retrieve animations for the icon and text
     const animatedStyle = useTabBarAnimation(isScrollingDown);
 
+    // Get NativeWind classes for theme colors
+    const { primary_full, on_primary, bg_primary } = colorClass;
+
     return (
-      <Animated.View style={[animatedStyle]} className='self-center w-11/12'>
-        <View className="absolute self-end bottom-28 rounded-full bg-red-400">
+      <Animated.View style={[animatedStyle]} className="self-center w-11/12">
+        <View className={`absolute self-end bottom-28 rounded-full ${primary_full}`}>
           <TouchableOpacity
-            className="p-5 rounded-full elevation bg-light-primary dark:bg-dark-primary"
+            className={`p-5 rounded-full elevation ${primary_full}`}
             onPress={() => { }}
             activeOpacity={0.7}
           >
-            <Text className={'text-light-onPrimary dark:text-dark-onPrimary'}>
+            <Text className={`${on_primary}`}>
               <Ionicons name={'add'} size={26} />
             </Text>
           </TouchableOpacity>
         </View>
-        <View className="absolute bottom-5 flex-row h-20 w-full px-3 items-center rounded-2xl elevation bg-light-primaryContainer dark:bg-dark-primaryContainer">
+        <View className={`absolute bottom-5 flex-row h-20 w-full px-3 items-center rounded-2xl elevation ${bg_primary}`}>
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const label =

@@ -92,14 +92,42 @@ const MainDrawer: React.FC = (): JSX.Element => {
         name="Home"
         component={MainBottom}
         options={{
-          title: 'Home',
+          title: t('drawer.home'),
         }}
       />
       <Drawer.Screen
         name="Profile"
         component={SettingScreen}
         options={{
-          title: 'Profile',
+          title: t('drawer.profile'),
+        }}
+      />
+      <Drawer.Screen
+        name="Contacts"
+        component={SettingScreen}
+        options={{
+          title: t('drawer.contacts'),
+        }}
+      />
+      <Drawer.Screen
+        name="Calls"
+        component={SettingScreen}
+        options={{
+          title: t('drawer.calls'),
+        }}
+      />
+      <Drawer.Screen
+        name="SavedMessages"
+        component={SettingScreen}
+        options={{
+          title: t('drawer.saved_messages'),
+        }}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={SettingScreen}
+        options={{
+          title: t('drawer.settings'),
         }}
       />
     </Drawer.Navigator>

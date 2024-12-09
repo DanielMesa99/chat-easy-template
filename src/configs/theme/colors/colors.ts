@@ -15,6 +15,7 @@ interface ColorScheme {
   sub: string;
   line: string;
   details: string;
+  error: string;
 }
 
 /**
@@ -42,7 +43,8 @@ const colors: Colors = {
     onSecondary: 'white',
     sub: 'gray',
     line: '#D1D5DB',
-    details: '#e0e0e0'
+    details: '#e0e0e0',
+    error: '#ef4444',
   },
   dark: {
     background: '#1E1E2D',
@@ -57,7 +59,8 @@ const colors: Colors = {
     onSecondary: 'white',
     sub: '#D3D3D3',
     line: 'black',
-    details: '#e0e0e0'
+    details: '#e0e0e0',
+    error: '#ef4444',
   },
 };
 

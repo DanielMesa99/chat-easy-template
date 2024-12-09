@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 /** Custom dependencies **/
 import { formatDate } from '../helpers';
+import { colorClass } from '../../../configs';
 
 /**
  * Interface for the ChatItem component props.
@@ -56,29 +57,32 @@ const ChatItem: React.FC<ChatItemProps> = React.memo(
     lastMessageRead,
     onPress,
   }: ChatItemProps): React.ReactElement => {
+    // Get NativeWind classes for theme colors
+    const { primary_full, on_bg, border_inactive, sub } = colorClass;
+
     return (
       <TouchableOpacity
-        className="flex-row items-center h-24 p-4 mx-1 border-b border-light-line dark:border-dark-line"
+        className={`flex-row items-center h-24 p-4 mx-1 border-b ${border_inactive}`}
         activeOpacity={0.7}
         onPress={onPress}
       >
         <Image
           source={{ uri: avatarUrl }}
-          className="w-16 h-16 rounded-full mr-4 bg-light-primary dark:bg-dark-primary"
+          className={`w-16 h-16 rounded-full mr-4 ${primary_full}`}
         />
         <View className="flex-1 justify-between">
           <View className="flex-row justify-between items-center w-full">
-            <Text className="text-xl font-bold max-w-[70%] text-light-onBackground dark:text-dark-onBackground">
+            <Text className={`text-xl font-bold max-w-[70%] ${on_bg}`}>
               {name}
             </Text>
-            <Text className="text-xs color-light-sub dark:color-dark-sub">
+            <Text className={`text-xs ${sub}`}>
               {formatDate(timestamp)}
             </Text>
           </View>
           <View className="flex-row justify-between items-center w-full">
             <View className="flex-row items-center max-w-[85%]">
               {lastMessageIsMine && (
-                <Text className="text-lg mr-1 color-light-sub dark:color-dark-sub">
+                <Text className={`text-lg mr-1 ${sub}`}>
                   <Ionicons
                     name={lastMessageRead ? 'checkmark-done' : 'checkmark'}
                     size={16}
@@ -86,13 +90,13 @@ const ChatItem: React.FC<ChatItemProps> = React.memo(
                 </Text>
               )}
               <Text
-                className="text-lg color-light-sub dark:color-dark-sub"
+                className={`text-lg ${sub}`}
                 numberOfLines={1}
               >
                 {lastMessage}
               </Text>
             </View>
-            {unread && <View className="w-2.5 h-2.5 rounded-full bg-red-500" />}
+            {unread && <View className={`w-3.5 h-3.5 rounded-full ${primary_full}`} />}
           </View>
         </View>
       </TouchableOpacity>

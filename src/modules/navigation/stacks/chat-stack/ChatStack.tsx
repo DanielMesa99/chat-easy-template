@@ -2,13 +2,14 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 /** Custom dependencies **/
-import { ChatHomeScreen, ChatScreen } from '../../../chat';
+import { ChatHomeScreen, ChatScreen, CommunityScreen } from '../../../chat';
 import { useThemeColors } from '../../../../configs';
 
 /** Define the parameters of the routes */
 type RootChatStackParams = {
   ChatHome: undefined;
   ChatView: { id: string; name: string };
+  CommunityHome: undefined;
 };
 
 const Stack = createStackNavigator();
@@ -46,6 +47,11 @@ const ChatStack: React.FC = (): JSX.Element => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="ChatView" component={ChatScreen} />
+      <Stack.Screen
+        name="CommunityHome"
+        component={CommunityScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

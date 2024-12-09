@@ -3,22 +3,26 @@ import {
   DrawerContentScrollView,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import { Switch } from 'react-native';
-import { useColorScheme } from 'nativewind';
+import { ImageBackground, View } from 'react-native';
 
 /** Custom dependencies **/
 import { DrawerItem } from './DrawerItem';
-import { IconName } from '../../../../../common';
+import { IconName, LanguageSwitcher, ThemeSwitcher } from '../../../../../common';
+import { colorClass } from '../../../../../configs';
 
 /**
  * Map of route names to icon names.
  * This object maps the name of the route to the corresponding icon to display in the Drawer.
- * 
+ *
  * @type {Object<string, string>}
  */
 const iconMap: { [key: string]: string } = {
   Home: 'home',
   Profile: 'person',
+  Contacts: 'people',
+  Calls: 'call',
+  SavedMessages: 'bookmark',
+  Settings: 'settings',
 };
 
 /**
@@ -27,7 +31,7 @@ const iconMap: { [key: string]: string } = {
  *
  * @extends {DrawerContentComponentProps}
  */
-interface DrawerContentProps extends DrawerContentComponentProps {}
+interface DrawerContentProps extends DrawerContentComponentProps { }
 
 /**
  * DrawerContent component that renders the content of the drawer (navigation menu).
@@ -52,10 +56,12 @@ interface DrawerContentProps extends DrawerContentComponentProps {}
  */
 const DrawerContent: React.FC<DrawerContentProps> = React.memo(
   (props: DrawerContentProps): JSX.Element => {
-    const { colorScheme, toggleColorScheme } = useColorScheme();
+    // Get NativeWind classes for theme colors
+    const { border_active } = colorClass;
 
     return (
       <DrawerContentScrollView {...props}>
+        <ImageBackground imageStyle={{ borderRadius: 10 }} source={require('../../../../../common/assets/images/user.jpg')} className='h-40 w-full mb-5' />
         {props.state.routes.map((route, index) => {
           const focused = props.state.index === index;
           const onPress = () => props.navigation.navigate(route.name);
@@ -71,7 +77,12 @@ const DrawerContent: React.FC<DrawerContentProps> = React.memo(
             />
           );
         })}
-        <Switch value={colorScheme == 'dark'} onChange={toggleColorScheme} />
+        <View className={`border-t ${border_active}`}>
+          <View className="flex-row justify-between items-center mt-5">
+            <LanguageSwitcher />
+            <ThemeSwitcher />
+          </View>
+        </View>
       </DrawerContentScrollView>
     );
   },

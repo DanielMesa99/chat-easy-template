@@ -22,12 +22,12 @@ const formatDate = (timestamp: string): string => {
 
 /**
  * Formats the timestamp of a message into a human-readable time.
- * 
+ *
  * @helper
  * @example
  * // Example usage:
  * const date = getFormattedTime(date);
- * 
+ *
  * @param {Date} date - The timestamp of the message to be formatted.
  * @returns {string} The formatted time in 12-hour format (e.g., "10:30 AM").
  */

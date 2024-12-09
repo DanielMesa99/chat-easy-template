@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 
 /** Custom dependencies **/
 import { BaseProps } from '../../../common';
+import { colorClass } from '../../../configs';
 
 /**
  * Interface for the EmptyChat component props.
@@ -28,14 +29,17 @@ interface EmptyChatProps {
  */
 const EmptyChat: React.FC<BaseProps & EmptyChatProps> = React.memo(
   ({ t, type }: BaseProps & EmptyChatProps): JSX.Element => {
+    // Get NativeWind classes for theme colors
+    const { on_bg } = colorClass;
+
     return (
       <View className="flex-1 justify-center items-center">
-        <Text className="text-center text-light-onBackground dark:text-dark-onBackground">
+        <Text className={`text-center ${on_bg}`}>
           {type === 'chat'
             ? t('chat_list.empty_chat')
             : t('chat_list.empty_group')}
         </Text>
-        <Text className="mt-3 text-center text-light-onBackground dark:text-dark-onBackground">
+        <Text className={`mt-3 text-center ${on_bg}`}>
           {type === 'chat' ? t('chat_list.new_chat') : t('chat_list.new_group')}
         </Text>
       </View>
